@@ -10,6 +10,10 @@ import { useUserStore } from './stores/user'
 import { useLogStore } from './stores/log'
 import { useContainerStore } from './stores/container'
 import { useChatStore } from './stores/chats'
+import Preloader from './components/Preloader.vue'
+
+const preloaderApp = createApp(Preloader)
+preloaderApp.mount('#app')
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -64,6 +68,7 @@ const initApp = async () => {
             logStore.fetchLogs(),
             containerStore.fetchContainers(),
             chatStore.fetchChats(),
+            userStore.fetchUsers(),
         ])
 
         app.mount('#app')

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { openedSwipeId } from '../shared/utils/swipe'
+import { useUserStore } from '../stores/user'
 
 const props = defineProps<{
     id: number
     onDelete: (id: number) => void
+    disableSwipe?: boolean
 }>()
+
+const userStore = useUserStore()
+
+const isSwipeAllowed = computed(() => {
+    return !props.disableSwipe && userStore.user?.role === 'admin'
+})
 
 const startX = ref(0)
 const translateX = ref(0)
@@ -21,11 +29,15 @@ watch(openedSwipeId, (newId) => {
 })
 
 const startDrag = (x: number) => {
+    if (!isSwipeAllowed.value) return
+
     startX.value = x
     isDragging.value = true
 }
 
 const moveDrag = (x: number) => {
+    if (!isSwipeAllowed.value) return
+
     if (!isDragging.value) return
 
     openedSwipeId.value = props.id
@@ -41,6 +53,8 @@ const moveDrag = (x: number) => {
 }
 
 const endDrag = () => {
+    if (!isSwipeAllowed.value) return
+
     isDragging.value = false
 
     if (translateX.value < maxTranslate / 2) {

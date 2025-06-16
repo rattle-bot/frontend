@@ -4,6 +4,7 @@ import LogsForm from './forms/LogsForm.vue'
 import ContainersForm from './forms/ContainersForm.vue'
 import ChatsForm from './forms/ChatsForm.vue'
 import UsersForm from './forms/UsersForm.vue'
+import { useUserStore } from '../stores/user'
 
 const props = defineProps<{
     name: 'logs' | 'containers' | 'chats' | 'users'
@@ -11,6 +12,8 @@ const props = defineProps<{
 
 const showForm = ref(false)
 const toggleForm = () => (showForm.value = !showForm.value)
+
+const userStore = useUserStore()
 
 const formComponent = computed(() => {
     switch (props.name) {
@@ -32,8 +35,10 @@ const formComponent = computed(() => {
     <div
         v-if="!showForm"
         class="w-full flex items-center justify-start px-4 pt-3"
+        :class="userStore.user?.role === 'user' && '!pt-0'"
     >
         <button
+            v-if="userStore.user?.role === 'admin'"
             @click="toggleForm"
             class="text-[0.9375rem] leading-[1.25rem] text-link font-semibold py-px px-2"
         >

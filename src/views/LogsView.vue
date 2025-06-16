@@ -40,7 +40,11 @@ const deleteLog = async (id: number) => {
                             <p
                                 class="text-[0.9375rem] leading-[1.25rem] text-subtitle-text tracking-tighter"
                             >
-                                {{ log.event_type }} - {{ log.match_type }}
+                                {{
+                                    log.event_type
+                                        ? `${log.event_type} - ${log.match_type}`
+                                        : log.match_type
+                                }}
                             </p>
                         </div>
                     </div>

@@ -5,8 +5,9 @@ export type Role = 'admin' | 'user'
 export interface User extends Base {
     telegram_id: string
     username: string
-    firstName: string
+    first_name: string
     role: Role
+    active: boolean
 }
 
 export interface Token {

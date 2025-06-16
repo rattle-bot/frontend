@@ -1,7 +1,13 @@
 import type { Base } from './base'
 
 export type MatchType = 'include' | 'exclude'
-export type EventType = 'error' | 'info' | 'warning' | 'success' | 'critical'
+export type EventType =
+    | 'error'
+    | 'info'
+    | 'warning'
+    | 'success'
+    | 'critical'
+    | ''
 
 export interface CreateLogInput {
     pattern: string // required, min: 1
