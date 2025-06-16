@@ -1,5 +1,8 @@
 FROM node:23-alpine
 
+ARG VITE_PUBLIC_API_HOST
+ENV VITE_PUBLIC_API_HOST=${VITE_PUBLIC_API_HOST}
+
 RUN npm install -g http-server
 
 WORKDIR /app
