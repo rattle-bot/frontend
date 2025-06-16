@@ -33,7 +33,7 @@ const deleteLog = async (id: number) => {
                             class="overflow-hidden flex-1 flex flex-col py-3 gap-0.5"
                         >
                             <p
-                                class="text-[1rem] leading-[1.375rem] text-text tracking-tight truncate"
+                                class="text-[1rem] leading-[1.375rem] text-text font-medium tracking-tight truncate"
                             >
                                 {{ log.pattern }}
                             </p>

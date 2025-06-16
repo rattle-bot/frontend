@@ -78,12 +78,12 @@ onBeforeUnmount(() => {
             :class="translateX < 0 ? 'left-0 right-0' : 'left-px right-px'"
         >
             <button
-                class="text-white text-xl w-20 h-full flex flex-col items-center justify-center gap-1"
+                class="text-white text-xl w-20 h-full flex flex-col items-center justify-center gap-0.5"
                 @click="props.onDelete(props.id)"
             >
                 <svg
-                    width="24"
-                    height="24"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
                         fill="white"
                     />
                 </svg>
-                <span class="text-[0.75rem] text-white font-medium"
+                <span class="text-[0.625rem] text-white font-medium"
                     >Delete</span
                 >
             </button>
