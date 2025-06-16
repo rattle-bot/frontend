@@ -8,6 +8,7 @@ import { postAuthTelegram } from './shared/api/user/auth'
 import { getAuthToken, setAuthToken } from './shared/utils/cookies'
 import { useUserStore } from './stores/user'
 import { useLogStore } from './stores/log'
+import { useContainerStore } from './stores/container'
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -16,6 +17,7 @@ app.use(pinia)
 
 const userStore = useUserStore()
 const logStore = useLogStore()
+const containerStore = useContainerStore()
 
 const receiveUser = async () => {
     if (!userStore) return
@@ -56,7 +58,10 @@ const initApp = async () => {
             await tmaWork()
         }
 
-        await logStore.fetchLogs()
+        await Promise.all([
+            logStore.fetchLogs(),
+            containerStore.fetchContainers(),
+        ])
 
         app.mount('#app')
     } catch (error) {
