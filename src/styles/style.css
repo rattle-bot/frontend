@@ -1,0 +1,157 @@
+@layer theme, base;
+
+@import 'tailwindcss';
+
+@import './theme.css' layer(theme);
+
+@layer base {
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Black.ttf') format('truetype');
+        font-weight: 900;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-ExtraBold.ttf') format('truetype');
+        font-weight: 800;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Bold.ttf') format('truetype');
+        font-weight: 700;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+        font-weight: 600;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Medium.ttf') format('truetype');
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Regular.ttf') format('truetype');
+        font-weight: 400;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Light.ttf') format('truetype');
+        font-weight: 300;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-ExtraLight.ttf') format('truetype');
+        font-weight: 200;
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Thin.ttf') format('truetype');
+        font-weight: 100;
+    }
+}
+
+:root {
+    --tg-safe-area-inset-top: 0px;
+    --tg-content-safe-area-inset-top: 0px;
+
+    --tg-safe-area-inset-bottom: 0px;
+    --tg-content-safe-area-inset-bottom: 0px;
+
+    --tg-safe-area-inset-left: 0px;
+    --tg-content-safe-area-inset-left: 0px;
+
+    --tg-safe-area-inset-right: 0px;
+    --tg-content-safe-area-inset-right: 0px;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+    background-color: #efeff4;
+    /* Также этот цвет есть в index.html для TMA Header */
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+    font-smooth: antialiased;
+
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    letter-spacing: 0.01em;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+* {
+    outline: none;
+
+    -ms-overflow-style: none;
+    /* For Montserratnet Explorer и Edge */
+    scrollbar-width: none;
+    /* For Firefox */
+
+    /* Disable selection/Copy of UIWebView */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+input,
+textarea {
+    /* Exception for input areas */
+    -webkit-touch-callout: default !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    /* For Safari, Chrome and other browsers based on WebKit */
+}
+
+#app {
+    display: contents;
+}
+
+.app-container {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    padding-top: calc(
+        var(--tg-safe-area-inset-top) + var(--tg-content-safe-area-inset-top)
+    );
+    padding-bottom: calc(
+        var(--tg-safe-area-inset-bottom) +
+            var(--tg-content-safe-area-inset-bottom)
+    );
+    padding-left: calc(
+        var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left)
+    );
+    padding-right: calc(
+        var(--tg-safe-area-inset-right) +
+            var(--tg-content-safe-area-inset-right)
+    );
+}

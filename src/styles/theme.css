@@ -1,0 +1,43 @@
+@theme {
+    --shadow-context-menu:
+        0 0 2px 1px rgba(0, 0, 0, 0.05), 0 32px 64px 0 rgba(0, 0, 0, 0.05);
+
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-hint: #707579;
+    --color-link: #007aff;
+    --color-button: #007aff;
+    --color-button-text: #ffffff;
+    --color-secondary-bg: #efeff4;
+    --color-header-bg: #ffffff;
+    --color-accent-text: #007aff;
+    --color-section-bg: #ffffff;
+    --color-section-header-text: #707579;
+    --color-subtitle-text: #707579;
+    --color-destructive-text: #e53935;
+
+    --color-skeleton: #00000005;
+    --color-divider: #00000026;
+    --color-outline: #0000000d;
+    --color-surface-primary: #fffffff2;
+    --color-surface-dark: #383838d9;
+    --color-tertiary-bg: #f4f4f7;
+    --color-quaternary-bg: #f6f6fa;
+    --color-segmented-control-active: #ffffff;
+    --color-card-bg: #ffffff;
+    --color-secondary-hint: #a2acb0;
+    --color-secondary-fill: #4378ff1a;
+    --color-green: #31d158;
+    --color-destructive-background: #f12e2e0d;
+    --color-primary-code-highlight: #4378ff;
+    --color-secondary-code-highlight: #b00fb4;
+    --color-tertiary-code-highlight: #3a9f20;
+    --color-plain-background: #0000000a;
+    --color-plain-foreground: #000000cc;
+    --color-toast-accent: #55a6ff;
+    --color-tooltip-background-dark: #000000d9;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-success: #008118;
+    --animate-spin: spin 1s steps(8, end) infinite;
+}
