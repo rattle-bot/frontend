@@ -15,8 +15,6 @@ const isSwipeAllowed = computed(() => {
     return !props.disableSwipe && userStore.user?.role === 'admin'
 })
 
-const startY = ref(0)
-const isHorizontalSwipe = ref(false)
 const startX = ref(0)
 const translateX = ref(0)
 const isDragging = ref(false)
@@ -30,33 +28,21 @@ watch(openedSwipeId, (newId) => {
     }
 })
 
-const startDrag = (x: number, y: number) => {
+const startDrag = (x: number) => {
     if (!isSwipeAllowed.value) return
 
     startX.value = x
-    startY.value = y
     isDragging.value = true
-    isHorizontalSwipe.value = false
 }
 
-const moveDrag = (x: number, y: number) => {
-    if (!isSwipeAllowed.value || !isDragging.value) return
+const moveDrag = (x: number) => {
+    if (!isSwipeAllowed.value) return
 
-    const deltaX = x - startX.value
-    const deltaY = y - startY.value
-
-    if (!isHorizontalSwipe.value && Math.abs(deltaX) > 10) {
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            isHorizontalSwipe.value = true
-        } else {
-            isDragging.value = false // It's vertical swipe — turn off swipe
-            return
-        }
-    }
-
-    if (!isHorizontalSwipe.value) return
+    if (!isDragging.value) return
 
     openedSwipeId.value = props.id
+
+    const deltaX = x - startX.value
     startX.value = x
 
     let next = translateX.value + deltaX
@@ -79,19 +65,13 @@ const endDrag = () => {
 }
 
 // Touch events
-const onTouchStart = (e: TouchEvent) => {
-    const touch = e.touches[0]
-    startDrag(touch.clientX, touch.clientY)
-}
-const onTouchMove = (e: TouchEvent) => {
-    const touch = e.touches[0]
-    moveDrag(touch.clientX, touch.clientY)
-}
+const onTouchStart = (e: TouchEvent) => startDrag(e.touches[0].clientX)
+const onTouchMove = (e: TouchEvent) => moveDrag(e.touches[0].clientX)
 const onTouchEnd = () => endDrag()
 
 // Mouse events
-const onMouseDown = (e: MouseEvent) => startDrag(e.clientX, e.clientY)
-const onMouseMove = (e: MouseEvent) => moveDrag(e.clientX, e.clientY)
+const onMouseDown = (e: MouseEvent) => startDrag(e.clientX)
+const onMouseMove = (e: MouseEvent) => moveDrag(e.clientX)
 const onMouseUp = () => endDrag()
 
 onMounted(() => {
@@ -136,7 +116,7 @@ onBeforeUnmount(() => {
         </div>
 
         <div
-            class="relative z-[2] bg-bg touch-pan-x"
+            class="relative z-[2] bg-bg"
             :style="{
                 transform: `translateX(${translateX}px)`,
                 transition: isDragging ? 'none' : 'transform 0.2s ease',
