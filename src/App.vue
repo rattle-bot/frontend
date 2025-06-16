@@ -19,7 +19,7 @@ const tabList = [
     <div class="app-container flex-grow flex flex-col w-full h-full relative">
         <Tabs v-model="currentTab" :tabs="tabList" />
 
-        <div class="flex-grow w-full flex flex-col gap-5">
+        <div class="flex-grow w-full flex flex-col gap-5 pb-20">
             <LogsView v-if="currentTab === 'logs'" />
             <ContainersView v-else-if="currentTab === 'containers'" />
             <ChatsView v-else-if="currentTab === 'chats'" />

@@ -7,6 +7,7 @@ import { getHashCheckDataString } from './shared/utils/telegram'
 import { postAuthTelegram } from './shared/api/user/auth'
 import { getAuthToken, setAuthToken } from './shared/utils/cookies'
 import { useUserStore } from './stores/user'
+import { useLogStore } from './stores/log'
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -14,6 +15,7 @@ const app = createApp(App)
 app.use(pinia)
 
 const userStore = useUserStore()
+const logStore = useLogStore()
 
 const receiveUser = async () => {
     if (!userStore) return
@@ -53,6 +55,8 @@ const initApp = async () => {
         } else if (WebApp.initData) {
             await tmaWork()
         }
+
+        await logStore.fetchLogs()
 
         app.mount('#app')
     } catch (error) {

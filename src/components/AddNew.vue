@@ -29,14 +29,24 @@ const formComponent = computed(() => {
 </script>
 
 <template>
-    <div v-if="!showForm" class="w-full flex items-center justify-start px-4 pt-3">
-        <button @click="toggleForm" class="text-[0.9375rem] leading-[1.25rem] text-link font-semibold py-px px-2">
+    <div
+        v-if="!showForm"
+        class="w-full flex items-center justify-start px-4 pt-3"
+    >
+        <button
+            @click="toggleForm"
+            class="text-[0.9375rem] leading-[1.25rem] text-link font-semibold py-px px-2"
+        >
             Add new
         </button>
     </div>
 
     <Transition name="fade-slide-form" appear>
-        <component v-if="showForm && formComponent" :is="formComponent" @close="toggleForm" />
+        <component
+            v-if="showForm && formComponent"
+            :is="formComponent"
+            @close="toggleForm"
+        />
     </Transition>
 </template>
 

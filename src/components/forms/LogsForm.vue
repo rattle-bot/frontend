@@ -4,7 +4,9 @@ import Input from '../Input.vue'
 import Select from '../Select.vue'
 import Button from '../Button.vue'
 import type { EventType, MatchType } from '../../shared/api/types/log'
-import { createLog } from '../../shared/api/log'
+import { useLogStore } from '../../stores/log'
+
+const logStore = useLogStore()
 
 const emit = defineEmits<{
     (e: 'close'): void
@@ -46,7 +48,7 @@ const handleSubmit = async () => {
     error.value = null
 
     try {
-        const res = await createLog({
+        const res = await logStore.addLog({
             pattern: pattern.value.trim(),
             match_type: matchType.value,
             event_type: eventType.value,
@@ -71,15 +73,30 @@ const handleSubmit = async () => {
 
 <template>
     <div class="w-full px-4.5 flex flex-col">
-        <p class="uppercase text-section-header-text p-4 pb-2 text-[0.8125rem] leading-[1rem] tracking-tight">
+        <p
+            class="uppercase text-section-header-text p-4 pb-2 text-[0.8125rem] leading-[1rem] tracking-tight"
+        >
             New logs pattern
         </p>
 
         <div class="w-full flex flex-col gap-3">
             <Input v-model="pattern" placeholder="Regex pattern (Golang)" />
-            <Select v-model="matchType" :options="matchOptions" placeholder="Match type" />
-            <Select v-model="eventType" :options="eventOptions" placeholder="Event type" />
-            <Button name="Add" :loading="loading" @click="handleSubmit" :disabled="!isValid" />
+            <Select
+                v-model="matchType"
+                :options="matchOptions"
+                placeholder="Match type"
+            />
+            <Select
+                v-model="eventType"
+                :options="eventOptions"
+                placeholder="Event type"
+            />
+            <Button
+                name="Add"
+                :loading="loading"
+                @click="handleSubmit"
+                :disabled="!isValid"
+            />
         </div>
     </div>
 </template>
