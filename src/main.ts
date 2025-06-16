@@ -9,6 +9,7 @@ import { getAuthToken, setAuthToken } from './shared/utils/cookies'
 import { useUserStore } from './stores/user'
 import { useLogStore } from './stores/log'
 import { useContainerStore } from './stores/container'
+import { useChatStore } from './stores/chats'
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -18,6 +19,7 @@ app.use(pinia)
 const userStore = useUserStore()
 const logStore = useLogStore()
 const containerStore = useContainerStore()
+const chatStore = useChatStore()
 
 const receiveUser = async () => {
     if (!userStore) return
@@ -61,6 +63,7 @@ const initApp = async () => {
         await Promise.all([
             logStore.fetchLogs(),
             containerStore.fetchContainers(),
+            chatStore.fetchChats(),
         ])
 
         app.mount('#app')
