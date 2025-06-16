@@ -17,3 +17,8 @@ export interface AuthRequest {
     check_data_string: string
     hash: string
 }
+
+export interface CreateUserInput {
+    telegram_id: string
+    role: Role
+}
