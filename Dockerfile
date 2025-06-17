@@ -20,4 +20,4 @@ RUN npm run build
 
 EXPOSE ${FRONTEND_PORT}
 
-CMD sh -c "http-server dist --proxy http://localhost:${FRONTEND_PORT}? --spa"
+CMD sh -c "http-server dist --spa -p ${FRONTEND_PORT} -a 0.0.0.0"
