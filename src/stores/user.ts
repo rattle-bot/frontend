@@ -6,6 +6,7 @@ import {
     getUser,
     listUsers,
 } from '../shared/api/user'
+import { deleteCookie } from '../shared/utils/cookies'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -20,7 +21,13 @@ export const useUserStore = defineStore('user', {
         async setUser() {
             const resultUser = await getUser()
 
-            if (resultUser) this.user = resultUser
+            if (resultUser) {
+                this.user = resultUser
+            } else {
+                deleteCookie('access_token')
+
+                window.location.reload()
+            }
         },
         clearUser() {
             this.user = null
