@@ -15,7 +15,10 @@ import { handleCopy } from '../shared/utils/clipboard'
         </p>
 
         <div class="flex flex-col">
-            <div class="flex items-center gap-2">
+            <div
+                v-if="WebApp.initDataUnsafe.user?.id"
+                class="flex items-center gap-2"
+            >
                 <p class="text-[1rem] leading-[1.375rem] text-text font-medium">
                     Your user id:
                 </p>

@@ -73,6 +73,8 @@ const initApp = async () => {
             await receiveUser()
         } else if (WebApp.initData) {
             await tmaWork()
+        } else {
+            throw new Error('No access')
         }
 
         await Promise.all([
