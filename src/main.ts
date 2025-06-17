@@ -11,6 +11,8 @@ import { useLogStore } from './stores/log'
 import { useContainerStore } from './stores/container'
 import { useChatStore } from './stores/chats'
 import Preloader from './components/Preloader.vue'
+import NoAccess from './components/NoAccess.vue'
+import axios from 'axios'
 
 const preloaderApp = createApp(Preloader)
 preloaderApp.mount('#app')
@@ -31,13 +33,22 @@ const receiveUser = async () => {
     await userStore.setUser()
 }
 
+const handleAccessError = (error: unknown) => {
+    if (axios.isAxiosError(error) && error.response?.status === 403) {
+        throw new Error('No access')
+    }
+}
+
 const tmaWork = async () => {
     const { hash, checkDataString } = getHashCheckDataString(WebApp.initData)
 
-    const result = await postAuthTelegram({
-        hash,
-        check_data_string: checkDataString,
-    })
+    const result = await postAuthTelegram(
+        {
+            hash,
+            check_data_string: checkDataString,
+        },
+        handleAccessError,
+    )
 
     if (!result) {
         return
@@ -73,6 +84,13 @@ const initApp = async () => {
 
         app.mount('#app')
     } catch (error) {
+        if ((error as Error).message === 'No access') {
+            const noAccess = createApp(NoAccess)
+            noAccess.mount('#app')
+
+            return
+        }
+
         console.error(error)
         setTimeout(initApp, 5000)
     }
