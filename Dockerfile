@@ -15,6 +15,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE ${PORT}
+EXPOSE ${FRONTEND_PORT}
 
-CMD sh -c "http-server dist --proxy http://localhost:${PORT}? --spa"
+CMD sh -c "http-server dist --proxy http://localhost:${FRONTEND_PORT}? --spa"
