@@ -5,6 +5,7 @@ import LogsView from './views/LogsView.vue'
 import ContainersView from './views/ContainersView.vue'
 import ChatsView from './views/ChatsView.vue'
 import UsersView from './views/UsersView.vue'
+import Name from './components/Name.vue'
 
 const currentTab = ref('logs')
 const tabList = [
@@ -17,6 +18,8 @@ const tabList = [
 
 <template>
     <div class="app-container flex-grow flex flex-col w-full h-full relative">
+        <Name />
+
         <Tabs v-model="currentTab" :tabs="tabList" />
 
         <div class="flex-grow w-full flex flex-col gap-5 pb-20">
