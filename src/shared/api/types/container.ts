@@ -1,6 +1,6 @@
 import type { Base } from './base'
 
-export type ContainerType = 'name' | 'image' | 'id'
+export type ContainerType = 'name' | 'image' | 'id' | 'label'
 
 export interface SaveContainerInput {
     type: ContainerType // required

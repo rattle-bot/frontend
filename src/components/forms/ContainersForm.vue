@@ -19,6 +19,7 @@ const exclusionOptions = [
     { name: 'name', label: 'Name' },
     { name: 'image', label: 'Image' },
     { name: 'id', label: 'Id' },
+    { name: 'label', label: 'Label key' },
 ]
 
 const loading = ref(false)
