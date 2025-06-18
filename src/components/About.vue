@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex items-center justify-center">
         <a
-            href="https://github.com/ilyxenc/rattle"
+            href="https://github.com/rattle-bot"
             target="_blank"
             class="flex items-center gap-2"
         >
