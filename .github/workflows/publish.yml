@@ -35,5 +35,5 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/rattle-frontend:${{ github.ref_name }}
-            ${{ env.REGISTRY }}/rattle-frontend:latest
+            ${{ env.REGISTRY }}/${{ env.REPO }}:${{ github.ref_name }}
+            ${{ env.REGISTRY }}/${{ env.REPO }}:latest
