@@ -1,11 +1,5 @@
 FROM node:23-alpine
 
-ARG VITE_PUBLIC_API_HOST
-ENV VITE_PUBLIC_API_HOST=${VITE_PUBLIC_API_HOST}
-
-ARG FRONTEND_PORT
-ENV FRONTEND_PORT=${FRONTEND_PORT}
-
 RUN npm install -g http-server
 
 WORKDIR /app
@@ -18,6 +12,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE ${FRONTEND_PORT}
+EXPOSE 3000
 
-CMD sh -c "http-server dist --spa -p ${FRONTEND_PORT} -a 0.0.0.0"
+CMD sh -c "http-server dist --spa -p 3000 -a 0.0.0.0"
