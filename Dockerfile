@@ -12,6 +12,9 @@ COPY . .
 
 RUN npm run build
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 3000
 
-CMD sh -c "http-server dist --spa -p 3000 -a 0.0.0.0"
+ENTRYPOINT ["/entrypoint.sh"]
