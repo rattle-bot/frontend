@@ -23,9 +23,11 @@ const setAuthorizationHeaders = (
     }
 }
 
+const baseURL = (window as any).__RATTLE_CONFIG__?.VITE_PUBLIC_API_HOST || ''
+
 const configureAxiosInstance = () => {
     const instance: AxiosInstance = axios.create({
-        baseURL: import.meta.env.VITE_PUBLIC_API_HOST,
+        baseURL: baseURL,
     })
 
     instance.interceptors.request.use(
