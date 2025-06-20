@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
 import type {
     Container,
+    RunningContainer,
     SaveContainerInput,
 } from '../shared/api/types/container'
 import {
     createContainer,
     deleteContainer as apiDeleteContainer,
     listContainers,
+    listRunningContainers,
 } from '../shared/api/container'
 
 export const useContainerStore = defineStore('container', {
@@ -58,6 +60,29 @@ export const useContainerStore = defineStore('container', {
                 )
             } catch (error) {
                 console.error('Failed to delete container:', error)
+            }
+        },
+    },
+})
+
+export const useRunningContainerStore = defineStore('runningContainers', {
+    state: () => ({
+        containers: [] as RunningContainer[],
+        isLoading: false,
+    }),
+
+    actions: {
+        async fetchRunningContainers() {
+            this.isLoading = true
+            try {
+                const result = await listRunningContainers()
+                if (result) {
+                    this.containers = result
+                }
+            } catch (error) {
+                console.error('Failed to fetch running containers:', error)
+            } finally {
+                this.isLoading = false
             }
         },
     },

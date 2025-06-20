@@ -1,5 +1,9 @@
 import api from '../api'
-import type { Container, RunningContainer, SaveContainerInput } from '../types/container'
+import type {
+    Container,
+    RunningContainer,
+    SaveContainerInput,
+} from '../types/container'
 
 export const createContainer = async (
     input: SaveContainerInput,
@@ -33,7 +37,9 @@ export const listContainers = async (): Promise<Container[] | undefined> => {
     }
 }
 
-export const listRunningContainers = async (): Promise<RunningContainer[] | undefined> => {
+export const listRunningContainers = async (): Promise<
+    RunningContainer[] | undefined
+> => {
     try {
         const response = await api.get('/container/list-running')
 
