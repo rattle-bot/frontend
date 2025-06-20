@@ -63,7 +63,7 @@ const selectedLabel = computed(() => {
         <Transition name="fade-slide" appear>
             <div
                 v-if="open"
-                class="max-w-[calc(100%-0.75rem)] max-h-[28rem] overflow-hidden absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col items-end"
+                class="max-w-[calc(100%-0.75rem)] max-h-[28rem] overflow-scroll absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col items-end"
                 style="
                     box-shadow:
                         0px 0px 2px 1px rgba(0, 0, 0, 0.05),
