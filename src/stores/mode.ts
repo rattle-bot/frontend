@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Mode } from '../shared/api/types/mode'
+import type { Mode, ModeValue } from '../shared/api/types/mode'
 import { getMode, updateMode as apiUpdateMode } from '../shared/api/mode'
 
 export const useModeStore = defineStore('mode', {
@@ -23,9 +23,9 @@ export const useModeStore = defineStore('mode', {
             }
         },
 
-        async updateMode() {
+        async updateMode(value: ModeValue) {
             try {
-                const result = await apiUpdateMode()
+                const result = await apiUpdateMode({ value })
                 if (result) {
                     this.mode = result
                 }

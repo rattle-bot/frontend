@@ -5,9 +5,16 @@ import AddNew from '../components/AddNew.vue'
 import { useContainerStore } from '../stores/container'
 import SwipeItem from '../components/SwipeItem.vue'
 import Divider from '../components/Divider.vue'
+import FilteringMode from '../components/FilteringMode.vue'
+import { useUserStore } from '../stores/user'
+import { useModeStore } from '../stores/mode'
 
 const containerStore = useContainerStore()
 const { containers } = storeToRefs(containerStore)
+
+const modeStore = useModeStore()
+
+const userStore = useUserStore()
 
 const deleteContainer = async (id: number) => {
     await containerStore.deleteContainer(id)
@@ -16,6 +23,14 @@ const deleteContainer = async (id: number) => {
 
 <template>
     <AddNew name="containers" />
+
+    <FilteringMode v-if="userStore.user?.role === 'admin'" />
+    <p
+        v-else
+        class="uppercase text-section-header-text px-8.5 text-[0.8125rem] leading-[1rem] tracking-tight"
+    >
+        Current mode: <b>{{ modeStore.mode?.value }}</b>
+    </p>
 
     <div class="px-[1.125rem]">
         <div class="flex flex-col items-end bg-bg rounded-xl overflow-hidden">
@@ -33,10 +48,15 @@ const deleteContainer = async (id: number) => {
                             >
                                 {{ container.value }}
                             </p>
+                            <p
+                                class="text-[0.9375rem] leading-[1.25rem] text-subtitle-text tracking-tighter"
+                            >
+                                {{ container.mode }}
+                            </p>
                         </div>
 
                         <p
-                            class="text-[0.9375rem] leading-[1.25rem] text-subtitle-text tracking-tighter"
+                            class="flex flex-col items-end text-[0.9375rem] leading-[1.25rem] text-subtitle-text tracking-tighter text-right"
                         >
                             {{ container.type }}
                         </p>

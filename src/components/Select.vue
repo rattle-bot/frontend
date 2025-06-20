@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import Divider from './Divider.vue'
 
 const props = defineProps<{
     modelValue: string | null
@@ -36,7 +37,9 @@ const selectedLabel = computed(() => {
             :class="!selectedLabel ? 'text-secondary-hint' : 'text-text'"
             @click="toggle"
         >
-            <span v-if="selectedLabel">{{ selectedLabel }}</span>
+            <span v-if="selectedLabel" class="truncate">{{
+                selectedLabel
+            }}</span>
             <span v-else class="text-gray-400">{{ placeholder }}</span>
 
             <svg
@@ -60,21 +63,25 @@ const selectedLabel = computed(() => {
         <Transition name="fade-slide" appear>
             <div
                 v-if="open"
-                class="absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col"
+                class="absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col items-end"
                 style="
                     box-shadow:
                         0px 0px 2px 1px rgba(0, 0, 0, 0.05),
                         0px 32px 64px rgba(0, 0, 0, 0.05);
                 "
             >
-                <button
-                    v-for="option in options"
-                    :key="option.name"
-                    @click="select(option)"
-                    class="text-left px-4 py-[0.8125rem] text-[1.0625rem] leading-[1.375rem]"
-                >
-                    {{ option.label }}
-                </button>
+                <template v-for="(option, index) in options" :key="option.name">
+                    <button
+                        @click="select(option)"
+                        class="w-full text-left px-4 py-[0.8125rem] text-[1.0625rem] leading-[1.375rem]"
+                    >
+                        {{ option.label }}
+                    </button>
+                    <Divider
+                        v-if="index < options.length - 1"
+                        class="w-[calc(100%-1rem)]"
+                    />
+                </template>
             </div>
         </Transition>
     </div>

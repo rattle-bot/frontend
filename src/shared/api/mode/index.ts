@@ -1,5 +1,5 @@
 import api from '../api'
-import type { Mode } from '../types/mode'
+import type { Mode, ModeValue } from '../types/mode'
 
 export const getMode = async (): Promise<Mode | undefined> => {
     try {
@@ -16,9 +16,11 @@ export const getMode = async (): Promise<Mode | undefined> => {
     }
 }
 
-export const updateMode = async (): Promise<Mode | undefined> => {
+export const updateMode = async (payload: {
+    value: ModeValue
+}): Promise<Mode | undefined> => {
     try {
-        const response = await api.patch('/mode')
+        const response = await api.patch('/mode', payload)
 
         const answer = response.data
         const data = answer.data
