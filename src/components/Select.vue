@@ -63,7 +63,7 @@ const selectedLabel = computed(() => {
         <Transition name="fade-slide" appear>
             <div
                 v-if="open"
-                class="absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col items-end"
+                class="max-w-[calc(100%-0.75rem)] absolute z-10 mt-2 mr-3 right-0 min-w-[12rem] bg-bg rounded-[1.25rem] flex flex-col items-end"
                 style="
                     box-shadow:
                         0px 0px 2px 1px rgba(0, 0, 0, 0.05),
@@ -73,7 +73,7 @@ const selectedLabel = computed(() => {
                 <template v-for="(option, index) in options" :key="option.name">
                     <button
                         @click="select(option)"
-                        class="w-full text-left px-4 py-[0.8125rem] text-[1.0625rem] leading-[1.375rem]"
+                        class="w-full text-left px-4 py-[0.8125rem] text-[1.0625rem] leading-[1.375rem] break-all"
                     >
                         {{ option.label }}
                     </button>
