@@ -4,6 +4,7 @@ const props = defineProps<{
     loading?: boolean
     disabled?: boolean
     type?: 'button' | 'submit' | 'reset'
+    mode?: 'gray' | 'filled'
 }>()
 
 const emit = defineEmits<{
@@ -21,15 +22,25 @@ const handleClick = (e: MouseEvent) => {
         :disabled="loading || disabled"
         @click="handleClick"
         class="w-full rounded-xl px-3 py-3 text-[1.0625rem] leading-[1.5rem] text-button-text font-semibold flex items-center justify-center"
-        :class="disabled ? 'bg-link/35' : 'bg-link'"
+        :class="[
+            props.mode === 'gray'
+                ? disabled
+                    ? 'bg-plain-background text-plain-foreground opacity-35'
+                    : 'bg-plain-background text-plain-foreground'
+                : disabled
+                  ? 'bg-link/35'
+                  : 'bg-link',
+        ]"
     >
         <svg
             v-if="loading"
             class="animate-spin"
+            :class="
+                props.mode === 'gray' ? 'fill-plain-foreground' : 'fill-white'
+            "
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <rect
@@ -39,7 +50,6 @@ const handleClick = (e: MouseEvent) => {
                 width="2"
                 height="7"
                 rx="1"
-                fill="white"
             />
             <rect
                 opacity="0.25"
@@ -49,7 +59,6 @@ const handleClick = (e: MouseEvent) => {
                 height="7"
                 rx="1"
                 transform="rotate(-45 13.4146 14.8284)"
-                fill="white"
             />
             <rect
                 x="2.00049"
@@ -58,7 +67,6 @@ const handleClick = (e: MouseEvent) => {
                 height="7"
                 rx="1"
                 transform="rotate(-90 2.00049 12.9999)"
-                fill="white"
             />
             <rect
                 opacity="0.75"
@@ -68,7 +76,6 @@ const handleClick = (e: MouseEvent) => {
                 height="7"
                 rx="1"
                 transform="rotate(-135 5.63672 19.7781)"
-                fill="white"
             />
         </svg>
         <span v-else>{{ name }}</span>

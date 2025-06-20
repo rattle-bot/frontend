@@ -8,11 +8,12 @@ import { postAuthTelegram } from './shared/api/user/auth'
 import { getAuthToken, setAuthToken } from './shared/utils/cookies'
 import { useUserStore } from './stores/user'
 import { useLogStore } from './stores/log'
-import { useContainerStore } from './stores/container'
+import { useContainerStore, useRunningContainerStore } from './stores/container'
 import { useChatStore } from './stores/chats'
 import Preloader from './components/Preloader.vue'
 import NoAccess from './components/NoAccess.vue'
 import axios from 'axios'
+import { useModeStore } from './stores/mode'
 
 const preloaderApp = createApp(Preloader)
 preloaderApp.mount('#app')
@@ -26,6 +27,8 @@ const userStore = useUserStore()
 const logStore = useLogStore()
 const containerStore = useContainerStore()
 const chatStore = useChatStore()
+const modeStore = useModeStore()
+const runningContainerStore = useRunningContainerStore()
 
 const receiveUser = async () => {
     if (!userStore) return
@@ -82,6 +85,8 @@ const initApp = async () => {
             containerStore.fetchContainers(),
             chatStore.fetchChats(),
             userStore.fetchUsers(),
+            modeStore.fetchMode(),
+            runningContainerStore.fetchRunningContainers(),
         ])
 
         app.mount('#app')
