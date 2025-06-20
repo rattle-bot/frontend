@@ -41,8 +41,8 @@ watch(selectedRunningContainerId, (short_id) => {
     )
 
     if (found) {
-        exclusionType.value = 'id'
-        value.value = found.short_id
+        exclusionType.value = 'name'
+        value.value = found.name
     }
 })
 
